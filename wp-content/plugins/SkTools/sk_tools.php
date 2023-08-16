@@ -22,6 +22,9 @@ final class SK_Tools_Elementor_Widgets{
    public function __construct(){
       add_action( 'init', [ $this, 'i18n' ] );
       add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
+      add_action( 'elementor/widgets/widgets_registered', [ $this, 'init_widgets' ] );
+      add_action( 'elementor/elements/categories_registered', [$this, 'add_elementor_widget_categories'] );
+      add_action( 'wp_enqueue_scripts', [$this, 'skt_widgets_dependencies'] );
    }
 
    
@@ -39,7 +42,30 @@ final class SK_Tools_Elementor_Widgets{
    }
 
    public function init_widgets()  {
+      // Include Widget files
+      require_once( __DIR__ . '/widgets/marquee.php' );
+      // Register widget
+      \Elementor\Plugin::instance()->widgets_manager->register( new \SK_Tools\ElementorWidgets\Widgets\Sk_Marquee() ); 
+   }
+
+   public function add_elementor_widget_categories( $elements_manager ) {
+
+      $elements_manager->add_category(
+         'sk_tools',
+         [
+            'title' => esc_html__( 'SK Tools', 'textdomain' ),
+            'icon' => 'fa fa-plug',
+         ]
+      );
       
+   }
+
+   public function skt_widgets_dependencies(){
+      // Scripts
+      wp_register_script('skt_marquee', plugins_url('assets/js/skt_marquee.js',__FILE__));
+
+      // CSS
+      wp_register_style('skt_marquee_style', plugins_url('assets/css/skt_marquee_style.css',__FILE__));
    }
 
    public static function get_instance(){

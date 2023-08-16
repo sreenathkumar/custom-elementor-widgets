@@ -1,0 +1,1 @@
+console.log('skt_script.js')
