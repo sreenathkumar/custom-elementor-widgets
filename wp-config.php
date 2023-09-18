@@ -33,10 +33,10 @@ define('WP_MAX_MEMORY_LIMIT', $wp_max_memory_limit );
 //Using environment variables for DB connection information
 
 // ** Database settings - You can get this info from your web host ** //
-$connectstr_dbhost = '';
-$connectstr_dbname = '';
-$connectstr_dbusername = '';
-$connectstr_dbpassword = '';
+$connectstr_dbhost = 'sql12.freesqldatabase.com';
+$connectstr_dbname = 'sql12647318';
+$connectstr_dbusername = 'sql12647318';
+$connectstr_dbpassword = 'yFpLlLR6ar';
 
 /** The name of the database for WordPress */
 define('DB_NAME', $connectstr_dbname);
